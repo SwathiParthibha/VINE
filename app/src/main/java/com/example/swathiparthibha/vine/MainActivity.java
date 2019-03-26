@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.google.android.gms.common.server.converter.StringToIntConverter;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -21,7 +23,8 @@ import org.json.*;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    public int longitude = 0;
+    public int latitude = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -58,7 +61,19 @@ public class MainActivity extends AppCompatActivity {
 //                            } catch (JSONException e) {
 //                                e.printStackTrace();
 //                            }
-                            textView.setText(myResponse);
+
+                            int latitude_index = myResponse.indexOf("lat");
+                            String latitude_s = new String (myResponse.substring(latitude_index+5,latitude_index+14));
+
+                            int longitude_index = myResponse.indexOf("long");
+                            String longitude_s = new String (myResponse.substring(longitude_index+6,longitude_index+16));
+
+                            //latitude = Integer.valueOf(latitude_s);
+                            //longitude = Integer.valueOf(longitude_s);
+                            //textView.setText("Latitude: " + latitude_s + '\n' + "Longitude: " + longitude_s);
+                            textView.setText("Latitude: " + latitude_s + '\n' + "Longitude: " + longitude_s);
+
+
                         }
                     });
                 }
@@ -89,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the user taps the Send button */
     public void sendMessage(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
+        //intent.putExtra("Latitude", latitude);
+        //intent.putExtra("Longitude", longitude);
         startActivity(intent);
     }
 }
