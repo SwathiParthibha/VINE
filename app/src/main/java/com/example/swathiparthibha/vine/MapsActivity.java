@@ -11,43 +11,54 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    public int latitude = 0;
-    public int longitude = 0;
+    public double latitude = 0;
+    public double longitude = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //Intent intent = getIntent();
-        //latitude = intent.getIntExtra("Latitude", 0);
-        //longitude = intent.getIntExtra("Longitude", 0);
 
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        latitude = getIntent().getDoubleExtra("Latitude",0.0);
+        longitude = getIntent().getDoubleExtra("Longitude",0.0);
+
+
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+        latitude = getIntent().getDoubleExtra("Latitude",0.0);
+        longitude = getIntent().getDoubleExtra("Longitude",0.0);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
-        LatLng myLocation = new LatLng(40.600716989031525, -74.3868679583091);
+        LatLng myLocation = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker at My Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        float zoomLevel = 16.0f; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, zoomLevel));
     }
+
 }
