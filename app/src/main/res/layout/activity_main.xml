@@ -11,23 +11,34 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginTop="1dp"
         android:onClick="sendMessage2"
         android:text="Send Alert"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginRight="133dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="13dp"
         android:onClick="sendMessage"
         android:text="See Location"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -38,20 +49,17 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="366dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="60dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginLeft="9dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginRight="9dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
         android:text="Vehicular Injury Notifying Equipment App"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:textSize="19dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="8dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -64,11 +72,8 @@
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier4"
@@ -88,43 +93,48 @@
         android:id="@+id/barrier6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+        app:barrierDirection="left"
+        tools:layout_editor_absoluteX="384dp" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+        app:barrierDirection="left"
+        tools:layout_editor_absoluteX="384dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginBottom="37dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginLeft="142dp"
-        android:layout_marginRight="164dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="78dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginRight="142dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="18dp"
         android:text="TextView"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/mediumImage"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#F00"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
         android:id="@+id/lowImage"
         android:layout_width="186dp"
         android:layout_height="189dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginLeft="77dp"
-        android:layout_marginRight="101dp"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginLeft="81dp"
+        android:layout_marginRight="102dp"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="184dp"
         android:cropToPadding="false"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mediumImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -134,12 +144,16 @@
         android:id="@+id/mediumImage"
         android:layout_width="166dp"
         android:layout_height="202dp"
-        android:layout_marginEnd="271dp"
-        android:layout_marginRight="271dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginRight="63dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="8dp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lowImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/barrier5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/medium" />
 
@@ -147,14 +161,33 @@
         android:id="@+id/fastImage"
         android:layout_width="182dp"
         android:layout_height="260dp"
-        android:layout_marginEnd="295dp"
-        android:layout_marginRight="295dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginEnd="269dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="269dp"
+        android:layout_marginStart="2dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lowImage"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/fast" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="233dp"
+        android:layout_marginEnd="279dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="279dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="219dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
 </android.support.constraint.ConstraintLayout>

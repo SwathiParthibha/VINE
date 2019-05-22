@@ -1,22 +1,23 @@
 package com.example.swathiparthibha.vine;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
-import android.os.Looper;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
-
-import com.google.android.gms.maps.SupportMapFragment;
 
 import java.io.IOException;
-import java.net.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,7 +31,9 @@ public class MainActivity extends AppCompatActivity{
     public double longitude = 0;
     public double latitude = 0;
     public double speed = 0;
+    public int panic = 0;
     public boolean speak = false;
+    public boolean state = true;
     int count = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -38,10 +41,13 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView textView = findViewById(R.id.textView);
+        final TextView textView = findViewById(R.id.textView1);
+        final TextView textView2 = findViewById(R.id.textView);
         final ImageView lowImage = findViewById(R.id.lowImage);
         final ImageView mediumImage = findViewById(R.id.mediumImage);
         final ImageView fastImage = findViewById(R.id.fastImage);
+
+
         getDweet();
 
         Thread t=new Thread(){
@@ -53,31 +59,50 @@ public class MainActivity extends AppCompatActivity{
                 while(!isInterrupted()){
 
                     try {
-                        Thread.sleep(6000);  //1000ms = 1 sec
+                        Thread.sleep(1000);  //1000ms = 1 sec
 
                         runOnUiThread(new Runnable() {
 
+                            @RequiresApi(api = Build.VERSION_CODES.M)
                             @Override
                             public void run() {
                                 getDweet();
-                                textView.setText(String.valueOf(speed));
+                                if(panic == 1) {
+                                    textView.setText("Panic Button: EMERGENCY");
+                                    textView.setTextColor(Color.RED);
+                                    if(state) {
+                                        addNotification();
+                                        state = false;
+                                    }
+                                }
+                                else if(panic == 0){
+                                    textView.setText("Panic Button: Normal");
+                                    textView.setTextColor(Color.rgb(30,96,52));
+                                    state = true;
+
+                                }
+                                else{
+                                    state = false;
+                                }
+
+
                                 if(speed < 1){
                                     lowImage.setVisibility(View.VISIBLE);
                                     mediumImage.setVisibility(View.INVISIBLE);
                                     fastImage.setVisibility(View.INVISIBLE);
-                                    textView.setText("Slow");
+                                    textView2.setText("Speed: Slow");
                                 }
                                 else if(speed >= 2 && speed <= 5){
                                     mediumImage.setVisibility(View.VISIBLE);
                                     lowImage.setVisibility(View.INVISIBLE);
                                     fastImage.setVisibility(View.INVISIBLE);
-                                    textView.setText("Medium");
+                                    textView2.setText("Speed: Medium");
                                 }
                                 else{
                                     fastImage.setVisibility(View.VISIBLE);
                                     lowImage.setVisibility(View.INVISIBLE);
                                     mediumImage.setVisibility(View.INVISIBLE);
-                                    textView.setText("FAST");
+                                    textView2.setText("Speed: FAST");
                                 }
                             }
                         });
@@ -97,6 +122,23 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    private void addNotification() {
+        // Builds your notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("VINE App")
+                .setContentText("EMERGENCY! PANIC BUTTON HAS BEEN TOGGLED")
+                .setAutoCancel(true);
+
+        // Creates the intent needed to show the notification
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }
 
 
     public void getDweet(){
@@ -134,12 +176,18 @@ public class MainActivity extends AppCompatActivity{
                                 String longitude_s = new String(myResponse.substring(longitude_index + 6, longitude_index + 15));
 
                                 int speed_index = myResponse.indexOf("speed");
+                                int panic_index = myResponse.indexOf("panic");
+                                String speed_s = new String(myResponse.substring(speed_index + 7, panic_index-2));
+
+
                                 int last_index = myResponse.indexOf("}");
-                                String speed_s = new String(myResponse.substring(speed_index + 7, last_index));
+                                String panic_s = new String(myResponse.substring(panic_index + 7, last_index));
+
 
                                 latitude = Double.parseDouble(latitude_s);
                                 longitude = Double.parseDouble(longitude_s);
                                 speed = Double.parseDouble(speed_s);
+                                panic = Integer.parseInt(panic_s);
 
                                 //textView.setText("Speed " + speed);
 
