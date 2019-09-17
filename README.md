@@ -7,4 +7,4 @@ Each parent can use the VINE app on their Android cellular phone to monitor the 
 ![image](pic1.png)
 
 
-![image](pic2.png)
+![image](pic2.jpg)
