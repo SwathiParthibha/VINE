@@ -4,7 +4,7 @@ VINE (Vehicular Injury Notifying Equipment) automatically notifies parents of an
 
 Each parent can use the VINE app on their Android cellular phone to monitor the collected data, including the GPS location of the child. VINE uses sensing technology to detect the bike’s steadiness, positioning, and acceleration. A two-way communication system, with an audio and visual alert system for the parent and a panic button for the child, is included to ensure ongoing communication between the parent and the child. 
 
-![image](https://https://github.com/SwathiParthibha/VINE/blob/master/pic1.png)
+![image](https://https://github.com/SwathiParthibha/VINE/master/pic1.png)
 
 
-![image](https://https://github.com/SwathiParthibha/VINE/blob/master/pic2.png)
+![image](https://https://github.com/SwathiParthibha/VINE/master/pic2.png)
